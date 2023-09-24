@@ -25,8 +25,11 @@ class Layer_IntGrid_AutoLayer extends ldtk.Layer_IntGrid {
 			autoTiles.push({
 				tileId: jsonAutoTile.t,
 				flips: jsonAutoTile.f,
+				alpha: jsonAutoTile.a,
 				renderX: jsonAutoTile.px[0],
 				renderY: jsonAutoTile.px[1],
+				ruleId: jsonAutoTile.d[0],
+				coordId: jsonAutoTile.d[1],
 			});
 	}
 
@@ -43,9 +46,10 @@ class Layer_IntGrid_AutoLayer extends ldtk.Layer_IntGrid {
 				target = new h2d.TileGroup( untypedTileset.getAtlasTile() );
 
 			for( autoTile in autoTiles )
-				target.add(
+				target.addAlpha(
 					autoTile.renderX + pxTotalOffsetX,
 					autoTile.renderY + pxTotalOffsetY,
+					autoTile.alpha,
 					untypedTileset.getAutoLayerTile(autoTile)
 				);
 

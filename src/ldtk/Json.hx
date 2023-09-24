@@ -75,14 +75,10 @@ typedef ProjectJson = {
 	var levels: Array<LevelJson>;
 
 	/**
-This array is not used yet in current LDtk version (so, for now, it's always empty).
-
-In a later update, it will be possible to have multiple Worlds in a single project, each containing multiple Levels.
-
-What will change when "Multiple worlds" support will be added to LDtk:
+This array will be empty, unless you enable the Multi-Worlds in the project advanced settings.
 
  - in current version, a LDtk project file can only contain a single world with multiple levels in it. In this case, levels and world layout related settings are stored in the root of the JSON.
- - after the "Multiple worlds" update, there will be a `worlds` array in root, each world containing levels and layout settings. Basically, it's pretty much only about moving the `levels` array to the `worlds` array, along with world layout related values (eg. `worldGridWidth` etc).
+ - with "Multi-worlds" enabled, there will be a `worlds` array in root, each world containing levels and layout settings. Basically, it's pretty much only about moving the `levels` array to the `worlds` array, along with world layout related values (eg. `worldGridWidth` etc).
 
 If you want to start supporting this future update easily, please refer to this documentation: https://github.com/deepnight/ldtk/issues/231
 	**/
@@ -93,7 +89,7 @@ If you want to start supporting this future update easily, please refer to this 
 		If the project isn't in MultiWorlds mode, this is the IID of the internal "dummy" World.
 	**/
 	@internal
-	@added("1.2.6")
+	@added("1.3.0")
 	var dummyWorldIid: String;
 
 	/** Default X pivot (0 to 1) for new entities **/
@@ -128,6 +124,16 @@ If you want to start supporting this future update easily, please refer to this 
 	/** Default grid size for new layers **/
 	@internal
 	var defaultGridSize: Int;
+
+	/** Default width for new entities **/
+	@added("1.3.4")
+	@internal
+	var defaultEntityWidth: Int;
+
+	/** Default height for new entities **/
+	@added("1.3.4")
+	@internal
+	var defaultEntityHeight: Int;
 
 	/** Project background color **/
 	@color
@@ -186,6 +192,11 @@ If you want to start supporting this future update easily, please refer to this 
 	@added("0.7.0")
 	var backupLimit: Int;
 
+	/** Target relative path to store backup files **/
+	@internal
+	@added("1.3.0")
+	var backupRelPath: Null<String>;
+
 	/** An array containing various advanced flags (ie. options or other states). **/
 	@internal
 	@added("0.8.0")
@@ -215,7 +226,7 @@ If you want to start supporting this future update easily, please refer to this 
 
 
 /**
-**IMPORTANT**: this type is not used *yet* in current LDtk version. It's only presented here as a preview of a planned feature.
+**IMPORTANT**: this type is available as a preview. You can rely on it to update your importers, for when it will be officially available.
 
 A World contains multiple levels, and it has its own layout settings.
 **/
@@ -352,11 +363,11 @@ typedef LevelJson = {
 	var externalRelPath: Null<String>;
 
 	/**
-		An array listing all other levels touching this one on the world map.
+		An array listing all other levels touching this one on the world map. Since 1.4.0, this includes levels that overlap in the same world layer, or in nearby world layers.
 		Only relevant for world layouts where level spatial positioning is manual (ie. GridVania, Free). For Horizontal and Vertical layouts, this array is always empty.
 	**/
 	@added("0.6.0")
-	@changed("1.0.0")
+	@changed("1.4.0")
 	var __neighbours: Array<NeighbourLevel>;
 
 	/**
@@ -520,7 +531,7 @@ typedef LayerInstanceJson = {
 /**
 	This structure represents a single tile from a given Tileset.
 **/
-@section("2.2")
+@section("2.1.1")
 @added("0.4.0")
 @display("Tile instance")
 typedef Tile = {
@@ -553,6 +564,11 @@ typedef Tile = {
 	@internal
 	@changed("0.6.0")
 	var d: Array<Int>;
+
+
+	/** Alpha/opacity of the tile (0-1, defaults to 1) **/
+	@added("1.3.1")
+	var a: Float;
 }
 
 
@@ -585,7 +601,7 @@ typedef TilesetRect = {
 }
 
 
-@section("2.3")
+@section("2.2")
 @display("Entity instance")
 typedef EntityInstanceJson = {
 	/** Entity definition identifier **/
@@ -602,6 +618,14 @@ typedef EntityInstanceJson = {
 	/** Array of tags defined in this Entity definition **/
 	@added("1.0.0")
 	var __tags: Array<String>;
+
+	/** X world coordinate in pixels **/
+	@added("1.3.4")
+	var __worldX: Int;
+
+	/** Y world coordinate in pixels **/
+	@added("1.3.4")
+	var __worldY: Int;
 
 	/** Entity width in pixels. For non-resizable entities, it will be the same as Entity definition. **/
 	@added("0.8.0")
@@ -647,7 +671,7 @@ typedef EntityInstanceJson = {
 
 
 
-@section("2.4")
+@section("2.3")
 @display("Field instance")
 typedef FieldInstanceJson = {
 	/** Field definition identifier **/
@@ -744,6 +768,11 @@ typedef LayerDefJson = {
 	@internal
 	var doc: Null<String>;
 
+	/** User defined color for the UI **/
+	@added("1.3.1")
+	@internal
+	var uiColor: Null<String>;
+
 	/** Width and height of the grid in pixels **/
 	var gridSize: Int;
 
@@ -805,6 +834,11 @@ typedef LayerDefJson = {
 	@added("1.1.4")
 	var canSelectWhenInactive: Bool;
 
+	/** If TRUE, the content of this layer will be used when rendering levels in a simplified way for the world view  **/
+	@internal
+	@added("1.3.1")
+	var renderInWorldView: Bool;
+
 	/**
 		An array that defines extra optional info for each IntGrid value.
 		WARNING: the array order is not related to actual IntGrid values! As user can re-order IntGrid values freely, you may value "2" before value "1" in this array.
@@ -812,6 +846,11 @@ typedef LayerDefJson = {
 	@changed("1.0.0")
 	@only("IntGrid layer")
 	var intGridValues: Array<IntGridValueDef>;
+
+	/** Group informations for IntGrid values **/
+	@changed("1.4.0")
+	@only("IntGrid layer")
+	var intGridValuesGroups: Array<IntGridValueGroupDef>;
 
 	/**
 		Reference to the Tileset UID being used by this auto-layer rules. WARNING: some layer *instances* might use a different tileset. So most of the time, you should probably use the `__tilesetDefUid` value from layer instances.
@@ -864,8 +903,17 @@ typedef LayerDefJson = {
 typedef AutoLayerRuleGroupJson = {
 	var uid: Int;
 	var name: String;
+
+	@added("1.4.0")
+	var ?color: String;
+
+	@added("1.4.0")
+	var ?icon: Null<TilesetRect>;
+
 	var active: Bool;
+
 	var rules: Array<AutoRuleDef>;
+
 	@added("0.9.0")
 	var isOptional: Bool;
 
@@ -898,6 +946,8 @@ typedef AutoRuleDef = {
 
 	/** Array of all the tile IDs. They are used randomly or as stamps, based on `tileMode` value. **/
 	var tileIds: Array<Int>;
+
+	var alpha : Float;
 
 	/** If FALSE, the rule effect isn't applied, and no tiles are generated. **/
 	var active: Bool;
@@ -939,6 +989,30 @@ typedef AutoRuleDef = {
 
 	/** Y cell start offset **/
 	var yOffset: Int;
+
+	/** Tile X offset **/
+	@added("1.3.0")
+	var tileXOffset : Int;
+
+	/** Tile Y offset **/
+	@added("1.3.0")
+	var tileYOffset : Int;
+
+	/** Min random offset for X tile pos **/
+	@added("1.3.0")
+	var tileRandomXMin : Int;
+
+	/** Max random offset for X tile pos **/
+	@added("1.3.0")
+	var tileRandomXMax : Int;
+
+	/** Min random offset for Y tile pos **/
+	@added("1.3.0")
+	var tileRandomYMin : Int;
+
+	/** Max random offset for Y tile pos **/
+	@added("1.3.0")
+	var tileRandomYMax : Int;
 
 	/** If TRUE, enable Perlin filtering to only apply rule on specific random area **/
 	var perlinActive: Bool;
@@ -1006,6 +1080,27 @@ typedef EntityDefJson = {
 	@added("1.2.6")
 	var flipAroundPivot: Bool;
 
+	/** Min pixel width (only applies if the entity is resizable on X)**/
+	@added("1.3.3")
+	@internal
+	var minWidth: Null<Int>;
+
+	/** Max pixel width (only applies if the entity is resizable on X)**/
+	@added("1.3.3")
+	@internal
+	var maxWidth: Null<Int>;
+
+
+	/** Min pixel height (only applies if the entity is resizable on Y)**/
+	@added("1.3.3")
+	@internal
+	var minHeight: Null<Int>;
+
+	/** Max pixel height (only applies if the entity is resizable on Y)**/
+	@added("1.3.3")
+	@internal
+	var maxHeight: Null<Int>;
+
 	/** Only applies to entities resizable on both X/Y. If TRUE, the entity instance width/height will keep the same aspect ratio as the definition. **/
 	@added("0.8.0")
 	@internal
@@ -1051,6 +1146,12 @@ typedef EntityDefJson = {
 	**/
 	@added("1.0.0")
 	var tileRect: Null<TilesetRect>;
+
+	/**
+		This tile overrides the one defined in `tileRect` in the UI
+	**/
+	@added("1.4.0")
+	var uiTileRect: Null<TilesetRect>;
 
 	/**
 		An enum describing how the the Entity tile is rendered inside the Entity bounds.
@@ -1158,9 +1259,17 @@ typedef FieldDefJson = {
 	@internal
 	var editorDisplayMode: FieldDisplayMode;
 
+	@changed("1.3.0")
+	@internal
+	var editorDisplayScale: Float;
+
 	@added("1.1.4")
 	@internal
 	var editorLinkStyle: FieldLinkStyle;
+
+	@added("1.3.4")
+	@internal
+	var editorDisplayColor: Null<String>;
 
 	@internal
 	var editorDisplayPos: FieldDisplayPosition;
@@ -1203,6 +1312,10 @@ typedef FieldDefJson = {
 	@internal
 	@added("1.0.0")
 	var allowedRefs: EntityReferenceTarget;
+
+	@internal
+	@added("1.3.0")
+	var allowedRefsEntityUid: Null<Int>;
 
 	@internal
 	@added("1.0.0")
@@ -1338,16 +1451,22 @@ typedef EnumDefValues = {
 	/** Enum value **/
 	var id:String;
 
+	/** Optional tileset rectangle to represents this value **/
+	@added("1.3.0")
+	var tileRect: Null<TilesetRect>;
+
 	/** The optional ID of the tile **/
-	var tileId:Null<Int>;
+	@deprecation("1.3.0", "1.4.0", "tileRect")
+	var ?tileId:Null<Int>;
 
 	/** Optional color **/
 	@added("0.9.0")
 	var color:Int;
 
 	/** An array of 4 Int values that refers to the tile in the tileset image: `[ x, y, width, height ]` **/
+	@deprecation("1.3.0", "1.4.0", "tileRect")
 	@added("0.4.0")
-	var __tileSrcRect:Null< Array<Int> >; // TODO use a Tile instance here?
+	var ?__tileSrcRect:Null< Array<Int> >;
 }
 
 
@@ -1365,7 +1484,11 @@ typedef NeighbourLevel = {
 	@deprecation("1.0.0", "1.2.0", "levelIid")
 	var ?levelUid: Int;
 
-	/** A single lowercase character tipping on the level location (`n`orth, `s`outh, `w`est, `e`ast). **/
+	/**
+		A single lowercase character tipping on the level location (`n`orth, `s`outh, `w`est, `e`ast).
+		Since 1.4.0, this character value can also be `<` (neighbour depth is lower), `>` (neighbour depth is greater) or `o` (levels overlap and share the same world depth).
+	**/
+	@changed("1.4.0")
 	var dir: String;
 }
 
@@ -1409,7 +1532,31 @@ typedef IntGridValueDef = {
 
 	@color
 	var color:String ;
+
+	@added("1.3.3")
+	var tile : Null<ldtk.Json.TilesetRect>;
+
+	/** Parent group identifier (0 if none)**/
+	@added("1.4.0")
+	var groupUid: Int;
 }
+
+
+/** IntGrid value group definition **/
+@inline
+@display("IntGrid value group definition")
+@added("1.4.0")
+typedef IntGridValueGroupDef = {
+	/** Group unique ID **/
+	var uid: Int;
+
+	/** User defined string identifier **/
+	var identifier: Null<String>;
+
+	/** User defined color **/
+	var color: Null<String>;
+}
+
 
 /** In a tileset definition, enum based tag infos **/
 @inline
@@ -1430,7 +1577,7 @@ typedef TileCustomMetadata = {
 }
 
 /** This object describes the "location" of an Entity instance in the project worlds. **/
-@section("2.4.2")
+@section("2.3.1")
 @added("1.0.0")
 @display("Reference to an Entity instance")
 typedef EntityReferenceInfos = {
@@ -1454,7 +1601,7 @@ typedef EntityReferenceInfos = {
 /**
 	This object is just a grid-based coordinate used in Field values.
 **/
-@section("2.4.3")
+@section("2.3.2")
 @added("1.0.0")
 @display("Grid point")
 typedef GridPoint = {
@@ -1566,6 +1713,7 @@ enum FieldDisplayMode {
 	ValueOnly;
 	NameAndValue;
 	EntityTile;
+	LevelTile;
 	Points;
 	PointStar;
 	PointPath;
@@ -1638,6 +1786,7 @@ enum EntityReferenceTarget {
 	Any;
 	OnlySame;
 	OnlyTags;
+	OnlySpecificEntity;
 }
 
 @added("1.0.0")

@@ -2,25 +2,26 @@ package ldtk;
 
 
 typedef AutoTile = {
-	/**
-		X coordinate to place this tile in your render
-	**/
+	/** X coordinate to place this tile in your render **/
 	var renderX: Int;
 
-	/**
-		Y coordinate to place this tile in your render
-	**/
+	/** Y coordinate to place this tile in your render **/
 	var renderY: Int;
 
-	/**
-		Tile ID in the tileset
-	**/
+	/** Tile ID in the tileset **/
 	var tileId: Int;
 
-	/**
-		Possible values: 0=> no flipping, 1=> X flip, 2=> Y flip, 3=> X and Y flips
-	**/
+	/** Possible values: 0=> no flipping, 1=> X flip, 2=> Y flip, 3=> X and Y flips **/
 	var flips: Int;
+
+	/** Opacity (0-1)**/
+	var alpha: Float;
+
+	/** ID of the auto-rule that generated this tile **/
+	var ruleId: Int;
+
+	/** Coord ID of the auto-rule that generated this tile **/
+	var coordId: Int;
 }
 
 
@@ -49,8 +50,11 @@ class Layer_AutoLayer extends ldtk.Layer {
 			autoTiles.push({
 				tileId: jsonAutoTile.t,
 				flips: jsonAutoTile.f,
+				alpha: jsonAutoTile.a,
 				renderX: jsonAutoTile.px[0],
 				renderY: jsonAutoTile.px[1],
+				ruleId: jsonAutoTile.d[0],
+				coordId: jsonAutoTile.d[1],
 			});
 	}
 
@@ -67,9 +71,10 @@ class Layer_AutoLayer extends ldtk.Layer {
 				target = new h2d.TileGroup( untypedTileset.getAtlasTile() );
 
 			for( autoTile in autoTiles )
-				target.add(
+				target.addAlpha(
 					autoTile.renderX + pxTotalOffsetX,
 					autoTile.renderY + pxTotalOffsetY,
+					autoTile.alpha,
 					untypedTileset.getAutoLayerTile(autoTile)
 				);
 

@@ -5,20 +5,20 @@
 		"doc": "https://ldtk.io/json",
 		"schema": "https://ldtk.io/files/JSON_SCHEMA.json",
 		"appAuthor": "Sebastien 'deepnight' Benard",
-		"appVersion": "1.2.5",
+		"appVersion": "1.4.0",
 		"url": "https://ldtk.io"
 	},
-	"identifier": "World_Level_3",
-	"iid": "b1e31860-7820-11ed-b18d-6339f608f11d",
-	"uid": 120,
+	"identifier": "v1_4_0",
+	"iid": "fdf5dd10-3b70-11ee-a4c1-2d98aa7c2075",
+	"uid": 122,
 	"worldX": 0,
-	"worldY": 768,
+	"worldY": 1280,
 	"worldDepth": 0,
 	"pxWid": 256,
 	"pxHei": 256,
 	"__bgColor": "#7F8093",
 	"bgColor": null,
-	"useAutoIdentifier": true,
+	"useAutoIdentifier": false,
 	"bgRelPath": null,
 	"bgPos": null,
 	"bgPivotX": 0.5,
@@ -27,10 +27,10 @@
 	"__bgPos": null,
 	"externalRelPath": null,
 	"fieldInstances": [
-		{ "__identifier": "level_int", "__value": 0, "__type": "Int", "__tile": null, "defUid": 93, "realEditorValues": [] },
-		{ "__identifier": "level_string", "__value": "", "__type": "String", "__tile": null, "defUid": 94, "realEditorValues": [] },
-		{ "__identifier": "level_reward", "__value": null, "__type": "ExternEnum.DroppedItemType", "__tile": null, "defUid": 95, "realEditorValues": [] },
-		{ "__identifier": "lowercase_enum", "__value": [], "__type": "Array<LocalEnum.lowercase_enum>", "__tile": null, "defUid": 106, "realEditorValues": [] }
+		{ "__identifier": "level_int", "__type": "Int", "__value": 0, "__tile": null, "defUid": 93, "realEditorValues": [] },
+		{ "__identifier": "level_string", "__type": "String", "__value": "", "__tile": null, "defUid": 94, "realEditorValues": [] },
+		{ "__identifier": "level_reward", "__type": "ExternEnum.DroppedItemType", "__value": null, "__tile": null, "defUid": 95, "realEditorValues": [] },
+		{ "__identifier": "lowercase_enum", "__type": "Array<LocalEnum.lowercase_enum>", "__value": [], "__tile": null, "defUid": 106, "realEditorValues": [] }
 	],
 	"layerInstances": [
 		{
@@ -44,8 +44,8 @@
 			"__pxTotalOffsetY": 0,
 			"__tilesetDefUid": 46,
 			"__tilesetRelPath": "Cavernas_by_Adam_Saltsman-Extended.png",
-			"iid": "b1e33f70-7820-11ed-b18d-e705c345d973",
-			"levelId": 120,
+			"iid": "fdf5dd11-3b70-11ee-a4c1-6b9ec23ac76b",
+			"levelId": 122,
 			"layerDefUid": 41,
 			"pxOffsetX": 0,
 			"pxOffsetY": 0,
@@ -84,7 +84,7 @@
 				0,0,0,0,0,0,0,0,0
 			],
 			"autoLayerTiles": [],
-			"seed": 7573409,
+			"seed": 1878600,
 			"overrideTilesetUid": null,
 			"gridTiles": [],
 			"entityInstances": []
@@ -100,8 +100,8 @@
 			"__pxTotalOffsetY": 0,
 			"__tilesetDefUid": 46,
 			"__tilesetRelPath": "Cavernas_by_Adam_Saltsman-Extended.png",
-			"iid": "b1e33f71-7820-11ed-b18d-6b1e8f1612eb",
-			"levelId": 120,
+			"iid": "fdf5dd12-3b70-11ee-a4c1-2775e4f1138a",
+			"levelId": 122,
 			"layerDefUid": 82,
 			"pxOffsetX": 0,
 			"pxOffsetY": 0,
@@ -109,7 +109,7 @@
 			"optionalRules": [],
 			"intGridCsv": [],
 			"autoLayerTiles": [],
-			"seed": 1804637,
+			"seed": 9183880,
 			"overrideTilesetUid": null,
 			"gridTiles": [],
 			"entityInstances": []
@@ -125,8 +125,8 @@
 			"__pxTotalOffsetY": 0,
 			"__tilesetDefUid": null,
 			"__tilesetRelPath": null,
-			"iid": "b1e33f72-7820-11ed-b18d-b79666e3e725",
-			"levelId": 120,
+			"iid": "fdf60420-3b70-11ee-a4c1-87adcca9456d",
+			"levelId": 122,
 			"layerDefUid": 118,
 			"pxOffsetX": 0,
 			"pxOffsetY": 0,
@@ -134,7 +134,7 @@
 			"optionalRules": [],
 			"intGridCsv": [],
 			"autoLayerTiles": [],
-			"seed": 5544938,
+			"seed": 7863463,
 			"overrideTilesetUid": null,
 			"gridTiles": [],
 			"entityInstances": []
@@ -150,8 +150,8 @@
 			"__pxTotalOffsetY": 0,
 			"__tilesetDefUid": null,
 			"__tilesetRelPath": null,
-			"iid": "b1e33f73-7820-11ed-b18d-c3f6df89dcec",
-			"levelId": 120,
+			"iid": "fdf60421-3b70-11ee-a4c1-5bde7a085fb6",
+			"levelId": 122,
 			"layerDefUid": 4,
 			"pxOffsetX": 0,
 			"pxOffsetY": 0,
@@ -159,25 +159,27 @@
 			"optionalRules": [],
 			"intGridCsv": [],
 			"autoLayerTiles": [],
-			"seed": 2307796,
+			"seed": 5042540,
 			"overrideTilesetUid": null,
 			"gridTiles": [],
 			"entityInstances": [
 				{
 					"__identifier": "Hero",
-					"__grid": [1,2],
+					"__grid": [2,5],
 					"__pivot": [0.5,1],
 					"__tags": [],
 					"__tile": null,
 					"__smartColor": "#BAF236",
-					"iid": "bee74f40-7820-11ed-b18d-b5db23763aff",
+					"__worldX": 40,
+					"__worldY": 1376,
+					"iid": "0fa3ecf0-3b70-11ee-a4c1-b76253be54be",
 					"width": 16,
 					"height": 24,
 					"defUid": 23,
-					"px": [24,48],
-					"fieldInstances": [{ "__identifier": "startWeapon", "__value": "Grenade", "__type": "LocalEnum.Weapons", "__tile": null, "defUid": 39, "realEditorValues": [{
+					"px": [40,96],
+					"fieldInstances": [{ "__identifier": "startWeapon", "__type": "LocalEnum.Weapons", "__value": "LongBow", "__tile": null, "defUid": 39, "realEditorValues": [{
 						"id": "V_String",
-						"params": ["Grenade"]
+						"params": ["LongBow"]
 					}] }]
 				}
 			]
@@ -193,8 +195,8 @@
 			"__pxTotalOffsetY": 0,
 			"__tilesetDefUid": 14,
 			"__tilesetRelPath": "Minecraft_texture_pack.gif",
-			"iid": "b1e33f74-7820-11ed-b18d-a93114fcbf75",
-			"levelId": 120,
+			"iid": "fdf60422-3b70-11ee-a4c1-87ae3b51a044",
+			"levelId": 122,
 			"layerDefUid": 15,
 			"pxOffsetX": 0,
 			"pxOffsetY": 0,
@@ -202,7 +204,7 @@
 			"optionalRules": [],
 			"intGridCsv": [],
 			"autoLayerTiles": [],
-			"seed": 7003341,
+			"seed": 8933106,
 			"overrideTilesetUid": null,
 			"gridTiles": [],
 			"entityInstances": []
@@ -218,8 +220,8 @@
 			"__pxTotalOffsetY": 0,
 			"__tilesetDefUid": null,
 			"__tilesetRelPath": null,
-			"iid": "b1e33f75-7820-11ed-b18d-6792610805ca",
-			"levelId": 120,
+			"iid": "fdf60423-3b70-11ee-a4c1-9538d0fb3cbb",
+			"levelId": 122,
 			"layerDefUid": 13,
 			"pxOffsetX": 0,
 			"pxOffsetY": 0,
@@ -236,7 +238,7 @@
 				0,0,0,0,0,0,0,0,0,0,0
 			],
 			"autoLayerTiles": [],
-			"seed": 3817194,
+			"seed": 6300247,
 			"overrideTilesetUid": null,
 			"gridTiles": [],
 			"entityInstances": []
@@ -252,8 +254,8 @@
 			"__pxTotalOffsetY": 4,
 			"__tilesetDefUid": null,
 			"__tilesetRelPath": null,
-			"iid": "b1e33f76-7820-11ed-b18d-33642a8a18c6",
-			"levelId": 120,
+			"iid": "fdf60424-3b70-11ee-a4c1-492dd034147d",
+			"levelId": 122,
 			"layerDefUid": 87,
 			"pxOffsetX": 0,
 			"pxOffsetY": 0,
@@ -292,11 +294,11 @@
 				0,0,0,0,0,0,0,0,0
 			],
 			"autoLayerTiles": [],
-			"seed": 4152312,
+			"seed": 6555422,
 			"overrideTilesetUid": null,
 			"gridTiles": [],
 			"entityInstances": []
 		}
 	],
-	"__neighbours": []
+	"__neighbours": [{ "levelIid": "b32d7710-3b70-11ee-a4c1-ada3a8497e3b", "dir": "<" }]
 }
