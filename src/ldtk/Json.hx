@@ -661,6 +661,10 @@ typedef EntityInstanceJson = {
 	@changed("0.4.0")
 	var px: Array<Int>;
 
+	/** Two-bit integer. First bit determines whether or not this EntityInstance is flipped horizontally, the second bit vertically. **/
+	@added("1.2.6")
+	var f: Int;
+
 	/** An array of all custom fields and their values. **/
 	var fieldInstances: Array<FieldInstanceJson>;
 }
@@ -1062,6 +1066,20 @@ typedef EntityDefJson = {
 	@internal
 	var resizableY: Bool;
 
+	/** If TRUE, the entity instances will be flippable horizontally **/
+	@added("1.2.6")
+	@internal
+	var flippableX: Bool;
+
+	/** If TRUE, the entity instances will be flippable vertically **/
+	@added("1.2.6")
+	@internal
+	var flippableY: Bool;
+
+	/** Defines whether entities flip within bounds (FALSE) or around their pivot point (TRUE). **/
+	@added("1.2.6")
+	var flipAroundPivot: Bool;
+
 	/** Min pixel width (only applies if the entity is resizable on X)**/
 	@added("1.3.3")
 	@internal
@@ -1082,7 +1100,6 @@ typedef EntityDefJson = {
 	@added("1.3.3")
 	@internal
 	var maxHeight: Null<Int>;
-
 
 	/** Only applies to entities resizable on both X/Y. If TRUE, the entity instance width/height will keep the same aspect ratio as the definition. **/
 	@added("0.8.0")
