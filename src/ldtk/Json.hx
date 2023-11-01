@@ -734,6 +734,9 @@ typedef DefinitionsJson = {
 	/** All tilesets **/
 	var tilesets : Array<TilesetDefJson>;
 
+	/** All composite backgrounds *//
+	var compositeBackgrounds : Array<CompositeBackgroundJson>;
+
 	/** All internal enums **/
 	var enums : Array<EnumDefJson>;
 
@@ -1441,6 +1444,20 @@ typedef EnumDefJson = {
 	var externalFileChecksum: Null<String>;
 
 	/** An array of user-defined tags to organize the Enums **/
+	@added("1.0.0")
+	var tags: Array<String>;
+};
+
+@section("3.5")
+@display("Composite Background definition")
+typedef CompositeBackgroundDefJson = {
+	/** Unique Int identifier **/
+	var uid: Int;
+
+	/** User defined unique identifier **/
+	var identifier: String;
+
+	/** An array of user-defined tags to organize the Composite Backgrounds **/
 	@added("1.0.0")
 	var tags: Array<String>;
 };
