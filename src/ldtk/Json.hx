@@ -734,7 +734,7 @@ typedef DefinitionsJson = {
 	/** All tilesets **/
 	var tilesets : Array<TilesetDefJson>;
 
-	/** All composite backgrounds *//
+	/** All composite backgrounds */
 	var compositeBackgrounds : Array<CompositeBackgroundDefJson>;
 
 	/** All internal enums **/
@@ -1448,20 +1448,6 @@ typedef EnumDefJson = {
 	var tags: Array<String>;
 };
 
-@section("3.5")
-@display("Composite Background definition")
-typedef CompositeBackgroundDefJson = {
-	/** Unique Int identifier **/
-	var uid: Int;
-
-	/** User defined unique identifier **/
-	var identifier: String;
-
-	/** An array of user-defined tags to organize the Composite Backgrounds **/
-	@added("1.0.0")
-	var tags: Array<String>;
-};
-
 @section("3.4.1")
 @display("Enum value definition")
 typedef EnumDefValues = {
@@ -1486,7 +1472,19 @@ typedef EnumDefValues = {
 	var ?__tileSrcRect:Null< Array<Int> >;
 }
 
+@section("3.5")
+@display("Composite Background definition")
+typedef CompositeBackgroundDefJson = {
+	/** Unique Int identifier **/
+	var uid: Int;
 
+	/** User defined unique identifier **/
+	var identifier: String;
+
+	/** An array of user-defined tags to organize the Composite Backgrounds **/
+	@added("1.0.0")
+	var tags: Array<String>;
+};
 
 /* INLINED TYPES *****************************************************************************/
 
