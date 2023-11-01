@@ -735,7 +735,7 @@ typedef DefinitionsJson = {
 	var tilesets : Array<TilesetDefJson>;
 
 	/** All composite backgrounds *//
-	var compositeBackgrounds : Array<CompositeBackgroundJson>;
+	var compositeBackgrounds : Array<CompositeBackgroundDefJson>;
 
 	/** All internal enums **/
 	var enums : Array<EnumDefJson>;
