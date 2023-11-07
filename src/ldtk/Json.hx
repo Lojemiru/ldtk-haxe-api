@@ -1482,8 +1482,24 @@ typedef CompositeBackgroundDefJson = {
 	var identifier: String;
 
 	/** An array of user-defined tags to organize the Composite Backgrounds **/
-	@added("1.0.0")
 	var tags: Array<String>;
+
+	var backgrounds: Array<BackgroundDefJson>;
+};
+
+@section("3.5.1")
+@display("Background definition")
+typedef BackgroundDefJson = {
+	/** Unique Int identifier **/
+	var uid: Int;
+
+	/** User defined unique identifier **/
+	var identifier: String;
+
+	var pivotX: Float;
+	var pivotY: Float;
+	var pos: BgImagePos;
+	var relPath: Null<String>;
 };
 
 /* INLINED TYPES *****************************************************************************/
