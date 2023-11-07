@@ -1493,6 +1493,9 @@ typedef BackgroundDefJson = {
 	/** Unique Int identifier **/
 	var uid: Int;
 
+	/** User defined unique identifier **/
+	var identifier: String;
+
 	var pivotX: Float;
 	var pivotY: Float;
 	var pos: BgImagePos;
