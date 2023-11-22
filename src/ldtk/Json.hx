@@ -1775,6 +1775,7 @@ enum BgImagePos {
 	Cover;
 	CoverDirty;
 	Repeat;
+	Parallax;
 }
 
 enum TextLanguageMode {
