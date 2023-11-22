@@ -370,7 +370,8 @@ typedef LevelJson = {
 	@changed("1.4.0")
 	var __neighbours: Array<NeighbourLevel>;
 
-	var background: Null<CompositeBackgroundDefJson>;
+	//var background: Null<CompositeBackgroundDefJson>;
+	var backgroundUid: Null<Int>;
 	
 	/**
 		The *optional* relative path to the level background image.
