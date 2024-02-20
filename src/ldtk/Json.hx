@@ -1554,6 +1554,8 @@ typedef BackgroundDefJson = {
 	var pivotY: Float;
 	var parallaxX: Float;
 	var parallaxY: Float;
+	var repeatX: Bool;
+	var repeatY: Bool;
 	var pos: BgImagePos;
 	var relPath: Null<String>;
 };
